@@ -1,0 +1,6 @@
+[submodule "mbedtls"]
+	path = mbedtls
+	url = https://github.com/Mbed-TLS/mbedtls.git
+[submodule "include/panzi"]
+	path = include/panzi
+	url = https://gist.github.com/6856583.git
