@@ -16,6 +16,12 @@ Any system with CMake should do (Visual Studio on Windows). The library has been
 
 macOS and BSD support is in the plans.
 
+## NVBK header format
+
+The structs in [src/include/libnvbk/nvbk_internal.h](src/include/libnvbk/nvbk_internal.h) are self-explanatory.
+
+Some fields are still unknown. If you want to help, you can send NVBK images from your device. In the future I will set up another repository to collect all the images.
+
 ## License
 
 Unless otherwise specified, all the files in this repository are licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
