@@ -17,6 +17,10 @@
 #ifndef NVBK_COMMON_H
 #define NVBK_COMMON_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define NVBK_SECTOR_SIZE    0x200	// 512 bytes
 #define NVBK_HEADER_SIZE    0x1C
 #define NVBK_VERSION_SIZE   6
@@ -26,5 +30,9 @@
 #define NVBK_TYPE_STATIC    0x01
 
 #define NVBK_ENTRY_SIZE     0x29
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif	//NVBK_COMMON_H

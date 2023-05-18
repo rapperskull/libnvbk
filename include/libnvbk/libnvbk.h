@@ -17,6 +17,10 @@
 #ifndef LIBNVBK_H
 #define LIBNVBK_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include <stdbool.h>
 #include "nvbk_common.h"
@@ -60,5 +64,9 @@ int nvbk_read_entry(nvbk_header_t* header, int entry);
 int nvbk_read_all_entries(nvbk_header_t* header);
 int nvbk_update_hash(nvbk_header_t* header, int entry);
 int nvbk_write_to_file(nvbk_header_t* header, const char* filepath, bool overwrite);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif	//LIBNVBK_H

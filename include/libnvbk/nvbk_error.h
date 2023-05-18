@@ -17,6 +17,10 @@
 #ifndef NVBK_ERROR_H
 #define NVBK_ERROR_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define NVBK_ERR_OK                 0
 #define NVBK_SEE_ERRNO              -1
 #define NVBK_INVALID_PARAM          -2
@@ -31,5 +35,9 @@
 #define NVBK_WRITE_END              -11
 
 const char* nvbk_strerror(int errnum);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif	//NVBK_ERROR_H
