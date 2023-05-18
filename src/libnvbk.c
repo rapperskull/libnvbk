@@ -26,8 +26,11 @@
   #include <io.h>
   #include <BaseTsd.h>
   typedef SSIZE_T ssize_t;
+  #define MIN min
+  #define MAX max
 #else
   #include <unistd.h>
+  #include <sys/param.h>
 #endif
 
 #include <stdlib.h>
@@ -80,7 +83,7 @@ ssize_t read_all(int fd, unsigned char* buf, size_t count) {
   size_t left = count;
   ssize_t readBytes;
   do {
-    readBytes = read(fd, buf, left);
+    readBytes = read(fd, buf, (unsigned int)MIN(left, INT_MAX));
     if (readBytes < 0) return readBytes;
     if (readBytes == 0) return count - left;
     left -= readBytes;
@@ -93,7 +96,7 @@ ssize_t write_all(int fd, const unsigned char* buf, size_t count){
   size_t left = count;
   ssize_t writeBytes;
   do {
-    writeBytes = write(fd, buf, left);
+    writeBytes = write(fd, buf, (unsigned int)MIN(left, INT_MAX));
     if (writeBytes < 0) return writeBytes;
     if (writeBytes == 0) return count - left;
     left -= writeBytes;
@@ -162,9 +165,9 @@ nvbk_header_t* nvbk_open(const char* filepath, int *error) {
     void* temp = realloc(int_header, header->size);  // Reallocate to accomodate entire header
     if (temp == NULL) abort_open(NVBK_SEE_ERRNO);
     int_header = (nvbk_int_header_t*)temp;
-    readBytes = read_all(fd, (unsigned char *)int_header + NVBK_SECTOR_SIZE, header->size - NVBK_SECTOR_SIZE);  // Read the rest of the header
+    readBytes = read_all(fd, (unsigned char *)int_header + NVBK_SECTOR_SIZE, (size_t)header->size - NVBK_SECTOR_SIZE);  // Read the rest of the header
     if (readBytes < 0) abort_open(NVBK_SEE_ERRNO);
-    if ((size_t)readBytes != header->size - NVBK_SECTOR_SIZE) abort_open(NVBK_READ_END);
+    if ((size_t)readBytes != (size_t)header->size - NVBK_SECTOR_SIZE) abort_open(NVBK_READ_END);
   }
   
   if((header->entries = (nvbk_header_entry_t*)malloc(header->num_entries * sizeof(nvbk_header_entry_t))) == NULL) abort_open(NVBK_SEE_ERRNO);
